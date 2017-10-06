@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@gooddata/typings@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@gooddata/typings/-/typings-0.0.1.tgz#38f7326f9bd2522f272eb2696a28aaf1fb7cea56"
+
+"@gooddata/typings@0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z":
+  version "0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z"
+  resolved "https://registry.yarnpkg.com/@gooddata/typings/-/typings-0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z.tgz#f6259558d82f383d16184b56e39b37b18dcc55d7"
+
 "@types/express-serve-static-core@*":
   version "4.0.52"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.52.tgz#77ab67fffc402ff6e480c87c71d799ba79880223"
@@ -923,16 +931,18 @@ globals@^9.18.0:
   version "9.18.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.18.0.tgz#aa3896b3e69b487f17e31ed2143d69a8e30c2d8a"
 
-gooddata@4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/gooddata/-/gooddata-4.3.1.tgz#d26e399f63c7c266e9be82bc2de6de07ec69c554"
+gooddata@4.3.1-pavelzgdc-pzb-execute-afm-2017-11-09T10-21-47-002Z:
+  version "4.3.1-pavelzgdc-pzb-execute-afm-2017-11-09T10-21-47-002Z"
+  resolved "https://registry.yarnpkg.com/gooddata/-/gooddata-4.3.1-pavelzgdc-pzb-execute-afm-2017-11-09T10-21-47-002Z.tgz#67f20d3c307ede2343f129476899ef61c606835c"
   dependencies:
+    "@gooddata/typings" "0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z"
     es6-promise "3.0.2"
     fetch-cookie "0.4.0"
     invariant "2.2.2"
     isomorphic-fetch "2.2.1"
     lodash "4.17.4"
     md5 "2.2.1"
+    qs "6.5.1"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.11"
@@ -2129,6 +2139,10 @@ pseudomap@^1.0.2:
 punycode@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
+
+qs@6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
 
 qs@~6.4.0:
   version "6.4.0"

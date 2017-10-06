@@ -1,30 +1,19 @@
 import * as GoodData from 'gooddata';
-import { charts } from '../../legacy/tests/fixtures/VisObj.fixtures';
+import { charts } from '../../converters/tests/fixtures/VisObj.fixtures';
 import {
     UriAdapter
 } from '../UriAdapter';
-
-jest.mock('../SimpleExecutorAdapter', () => {
-    class DummySimpleExecutorAdapter {
-        public createDataSource() {
-            return Promise.resolve({});
-        }
-    }
-
-    return {
-        SimpleExecutorAdapter: DummySimpleExecutorAdapter
-    };
-});
 
 describe('UriAdapter', () => {
     const projectId = 'FoodMartDemo';
     const uri = '/gdc/md/FoodMartDemo/1';
     const uri2 = '/gdc/md/FoodMartDemo/2';
-    const dummyDataSource = {};
 
     function createDummySDK(): typeof GoodData {
         const visualizationObject = {
-            visualization: { content: charts.bar.simpleMeasure }
+            visualization: {
+                content: charts.bar.simpleMeasure
+            }
         };
 
         jest.spyOn(GoodData.xhr, 'get')
@@ -42,14 +31,6 @@ describe('UriAdapter', () => {
         const adapter = new UriAdapter(DummySDK, projectId);
         return adapter.createDataSource({ uri }).then(() => {
             expect(DummySDK.xhr.get).toBeCalledWith(uri);
-        });
-    });
-
-    it('should retrieve datasource when requested', () => {
-        const DummySDK = createDummySDK();
-        const adapter = new UriAdapter(DummySDK, projectId);
-        return adapter.createDataSource({ uri }).then((dataSource) => {
-            expect(dataSource).toEqual(dummyDataSource);
         });
     });
 

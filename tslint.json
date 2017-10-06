@@ -1,6 +1,7 @@
 {
   "extends": "tslint-config-gooddata",
   "rules": {
-    "no-submodule-imports": false
+    "no-submodule-imports": false,
+    "no-use-before-declare": true
   }
 }

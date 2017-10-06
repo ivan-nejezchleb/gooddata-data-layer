@@ -1,47 +1,31 @@
-import * as Afm from './interfaces/Afm';
-import * as Attribute from './afmMap/model/gooddata/Attribute';
-import * as MetadataSource from './interfaces/MetadataSource';
 import * as Header from './interfaces/Header';
-import * as Transformation from './interfaces/Transformation';
 import * as DataSourceUtils from './dataSources/utils';
 import * as DataSource from './dataSources/DataSource';
 import * as Filters from './helpers/filters';
 import * as Uri from './helpers/uri';
-import * as Converters from './legacy/converters';
-import * as AfmConverter from './legacy/toAFM';
-import * as TransformationUtils from './utils/TransformationUtils';
+import { toAfmResultSpec } from './converters/toAfmResultSpec';
+import * as ResultSpecUtils from './utils/ResultSpecUtils';
 import * as AfmUtils from './utils/AfmUtils';
-import * as VisObjConverter from './legacy/toVisObj';
-import * as VisualizationObject from './legacy/model/VisualizationObject';
+import * as VisualizationObject from './converters/model/VisualizationObject';
 import { ErrorCodes } from './constants/errors';
 import { DataTable } from './DataTable';
 import { DummyAdapter } from './utils/DummyAdapter';
-import { SimpleExecutorAdapter } from './adapters/SimpleExecutorAdapter';
+import { ExecuteAfmAdapter } from './adapters/ExecuteAfmAdapter';
 import { UriAdapter } from './adapters/UriAdapter';
-import { UriMetadataSource } from './UriMetadataSource';
-import { SimpleMetadataSource } from './SimpleMetadataSource';
 
 export {
-    Attribute,
     Header,
-    MetadataSource,
-    SimpleMetadataSource,
-    Transformation,
-    UriMetadataSource,
     ErrorCodes,
 
     AfmUtils,
+    ExecuteAfmAdapter,
     DataSourceUtils,
-    Afm,
-    Converters,
-    AfmConverter,
-    VisObjConverter,
+    toAfmResultSpec,
     DataSource,
     DataTable,
     DummyAdapter,
     Filters,
-    SimpleExecutorAdapter,
-    TransformationUtils,
+    ResultSpecUtils,
     Uri,
     UriAdapter,
     VisualizationObject
