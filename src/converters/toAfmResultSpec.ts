@@ -70,35 +70,44 @@ function convertDateFilter(filter: VisObj.IEmbeddedDateFilter): AFM.DateFilterIt
     return convertAbsoluteDateFilter(filter, dateDataSetUri);
 }
 
+function convertNegativeAttributeFilter(
+    filter: VisObj.IEmbeddedListAttributeFilter
+): AFM.INegativeAttributeFilter {
+    const negativeFilter: AFM.INegativeAttributeFilter = {
+        negativeAttributeFilter: {
+            displayForm: {
+                uri: filter.listAttributeFilter.displayForm
+            },
+            notIn: filter.listAttributeFilter.default.attributeElements
+        }
+    };
+    return negativeFilter;
+}
+
+function convertPositiveAttributeFilter(
+    filter: VisObj.IEmbeddedListAttributeFilter
+): AFM.IPositiveAttributeFilter {
+    const positiveFilter: AFM.IPositiveAttributeFilter = {
+        positiveAttributeFilter: {
+            displayForm: {
+                uri: filter.listAttributeFilter.displayForm
+            },
+            in: filter.listAttributeFilter.default.attributeElements
+        }
+    };
+    return positiveFilter;
+}
+
 function convertAttributeFilter(filter: VisObj.IEmbeddedListAttributeFilter): AFM.AttributeFilterItem {
     const items: string[] = filter.listAttributeFilter.default.attributeElements;
     // skip filters with ALL
-    if (items.length > 0) {
-        if (filter.listAttributeFilter.default.negativeSelection) {
-            const negativeFilter = {
-                negativeAttributeFilter: {
-                    displayForm: {
-                        uri: filter.listAttributeFilter.displayForm
-                    },
-                    notIn: items
-                }
-            };
-            return negativeFilter;
-        }
-
-        // Positive filter
-        const positiveFilter: AFM.IPositiveAttributeFilter = {
-            positiveAttributeFilter: {
-                displayForm: {
-                    uri: filter.listAttributeFilter.displayForm
-                },
-                in: items
-            }
-        };
-        return positiveFilter;
+    if (items.length === 0) {
+        return null;
     }
-
-    return null;
+    if (filter.listAttributeFilter.default.negativeSelection) {
+        return convertNegativeAttributeFilter(filter);
+    }
+    return convertPositiveAttributeFilter(filter);
 }
 
 function convertFilter(filter: VisObj.EmbeddedFilter): AFM.FilterItem {

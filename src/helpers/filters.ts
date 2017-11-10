@@ -56,7 +56,7 @@ function getGlobalDateFilter(afm: AFM.IAfm): AFM.DateFilterItem {
 }
 
 /**
- * AFM Date Filter magic:
+ * AFM Date Filter logic:
  * Prerequisities: At least one metric (M1) with date filter & global date filter (D1)
  *
  * Steps:
