@@ -6,10 +6,6 @@
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@gooddata/typings/-/typings-0.0.1.tgz#38f7326f9bd2522f272eb2696a28aaf1fb7cea56"
 
-"@gooddata/typings@0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z":
-  version "0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z"
-  resolved "https://registry.yarnpkg.com/@gooddata/typings/-/typings-0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z.tgz#f6259558d82f383d16184b56e39b37b18dcc55d7"
-
 "@types/express-serve-static-core@*":
   version "4.0.52"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.52.tgz#77ab67fffc402ff6e480c87c71d799ba79880223"
@@ -931,11 +927,11 @@ globals@^9.18.0:
   version "9.18.0"
   resolved "https://registry.yarnpkg.com/globals/-/globals-9.18.0.tgz#aa3896b3e69b487f17e31ed2143d69a8e30c2d8a"
 
-gooddata@4.3.1-pavelzgdc-pzb-execute-afm-2017-11-09T10-21-47-002Z:
-  version "4.3.1-pavelzgdc-pzb-execute-afm-2017-11-09T10-21-47-002Z"
-  resolved "https://registry.yarnpkg.com/gooddata/-/gooddata-4.3.1-pavelzgdc-pzb-execute-afm-2017-11-09T10-21-47-002Z.tgz#67f20d3c307ede2343f129476899ef61c606835c"
+gooddata@4.3.1-pavelzgdc-pzb-execute-afm-2017-11-13T12-38-52-853Z:
+  version "4.3.1-pavelzgdc-pzb-execute-afm-2017-11-13T12-38-52-853Z"
+  resolved "https://registry.yarnpkg.com/gooddata/-/gooddata-4.3.1-pavelzgdc-pzb-execute-afm-2017-11-13T12-38-52-853Z.tgz#9433d3cad3f0fdfa1c91127982cc3e44a526070e"
   dependencies:
-    "@gooddata/typings" "0.0.1-vaclavbohac-error-as-exception-2017-11-09T09-35-54-536Z"
+    "@gooddata/typings" "0.0.1"
     es6-promise "3.0.2"
     fetch-cookie "0.4.0"
     invariant "2.2.2"

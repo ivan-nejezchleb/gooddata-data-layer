@@ -299,7 +299,7 @@ function convertResultSpec(
     ];
 
     if (measures.length > 0) {
-        // for PIE chart with multiple metrics we need data like [[M1, M2, M3]] -> metricGroup in X
+        // for PIE chart with multiple metrics we need data like [[M1, M2, M3]] -> measureGroup in X
         const pieOnlyMeasures = visObj.type === 'pie' && categories.length === 0;
         const stackedChart = categories.some(c => c.category.collection === 'stack'); // TODO tests
         const measureGroupIndex = pieOnlyMeasures || stackedChart ? 0 : 1;
