@@ -4,7 +4,7 @@ import * as GoodData from 'gooddata';
 import { IAdapter } from '../interfaces/Adapter';
 import { IDataSource } from '../interfaces/DataSource';
 import { ExecuteAfmAdapter } from './ExecuteAfmAdapter';
-import { toAfmResultSpec } from '../converters/toAfmResultSpec';
+import { toAFM } from '../converters/toAFM';
 import { appendFilters } from '../utils/AfmUtils';
 import { IDataSourceParams } from '../interfaces/DataSourceParams';
 import { IVisualizationObjectResponse } from '../converters/model/VisualizationObject';
@@ -28,7 +28,7 @@ export class UriAdapter implements IAdapter<any> { // todo any
         return this.fetchVisualizationObject(sourceParams.uri)
             .then((visObject) => {
                 const content = visObject.visualization.content;
-                const { afm, resultSpec } = toAfmResultSpec(content, this.translatedPopSuffix);
+                const { afm, resultSpec } = toAFM(content, this.translatedPopSuffix);
                 const afmWithAttributeFilters: AFM.IAfm = appendFilters(
                     afm,
                     sourceParams.attributeFilters || [],

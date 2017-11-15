@@ -325,6 +325,7 @@ export const showInPercent: IFixture = {
         measures: [
             {
                 localIdentifier: 'm1',
+                format: '#,##0.00%',
                 definition: {
                     measure: {
                         item: {
@@ -364,6 +365,7 @@ export const showInPercentWithDate: IFixture = {
         measures: [
             {
                 localIdentifier: 'm1',
+                format: '#,##0.00%',
                 definition: {
                     measure: {
                         item: {
@@ -536,6 +538,7 @@ export const stackingAttribute: IFixture = {
         measures: [
             {
                 localIdentifier: 'm1',
+                format: '#,##0.00',
                 definition: {
                     measure: {
                         item: {

@@ -4,6 +4,47 @@ export type EmbeddedFilter = IEmbeddedDateFilter | IEmbeddedListAttributeFilter;
 
 export type EmbeddedDateFilterType = 'relative' | 'absolute';
 
+export type AttributeFilter = IPositiveAttributeFilter | INegativeAttributeFilter;
+export type DateFilter = IAbsoluteDateFilter | IRelativeDateFilter;
+export type MeasureFilter = AttributeFilter | DateFilter;
+export type Identifier = string;
+export type TotalType = 'sum' | 'avg' | 'max' | 'min' | 'nat' | 'med';
+export type CategoryCollection = 'attribute' | 'stack' | 'view' | 'trend' | 'segment';
+export type VisualizationType = 'table' | 'line' | 'column' | 'bar' | 'pie' | 'doughnut' | 'combo';
+export type VisualizationStyleType = 'common' | 'table' | 'line' | 'column' | 'bar';
+export type MeasureType = 'metric' | 'fact' | 'attribute';
+export type MeasureAggregation = 'sum' | 'count' | 'avg' | 'min' | 'max' | 'median' | 'runsum';
+export type BucketItem = IMeasure | IVisualizationAttribute;
+export type SortItem = IAttributeSortItem | IMeasureSortItem;
+export type LocatorItem =   IAttributeLocatorItem | IMeasureLocatorItem;
+
+export interface IAttributeSortItem {
+    attributeSortItem: {
+        direction: 'asc' | 'desc';
+        attributeIdentifier: Identifier
+    };
+}
+
+export interface IMeasureSortItem {
+    measureSortItem: {
+        direction: 'asc' | 'desc',
+        locators: LocatorItem[]
+    };
+}
+
+export interface IAttributeLocatorItem {
+    attributeLocatorItem: {
+        attributeIdentifier: Identifier,
+        element: string // URI
+    };
+}
+
+export interface IMeasureLocatorItem {
+    measureLocatorItem: {
+        measureIdentifier: Identifier
+    };
+}
+
 export interface IEmbeddedDateFilter {
     dateFilter: {
         type: EmbeddedDateFilterType;
@@ -31,7 +72,6 @@ export interface IMeasureSort {
     direction: SortDirection;
     sortByPoP?: boolean;
 }
-export type VisualizationStyleType = 'common' | 'table' | 'line' | 'column' | 'bar';
 
 export interface IVisualizationStyle {
     visualizationStyle: {
@@ -47,23 +87,57 @@ export interface IVisualizationStyle {
     };
 }
 
-export type MeasureType = 'metric' | 'fact' | 'attribute';
-export type MeasureAggregation = 'sum' | 'count' | 'avg' | 'min' | 'max' | 'median' | 'runsum';
-
-export interface IMeasure {
-    measure: {
-        type: MeasureType;
+export interface IMeasureDefinition {
+    measureDefinition: {
+        item: string; // URISTRING
         aggregation?: MeasureAggregation;
-        objectUri: string;
-        showInPercent: boolean;
-        showPoP: boolean;
-        title: string;
-        measureFilters: EmbeddedFilter[];
-        format?: string;
-        sort?: IMeasureSort;
-        styles?: IVisualizationStyle[];
-        generatedId?: string
+        filters?: MeasureFilter[];
+        computeRatio?: boolean;
     };
+}
+
+export interface IPoPMeasureDefinition {
+    popMeasureDefinition: {
+        measureIdentifier: Identifier;
+        popAttribute: string;
+    };
+}
+
+export interface IPositiveAttributeFilter {
+    positiveAttributeFilter: {
+        displayForm: string;
+        in: string[];
+    };
+}
+
+export interface INegativeAttributeFilter {
+    negativeAttributeFilter: {
+        displayForm: string;
+        notIn: string[];
+    };
+}
+
+export interface IAbsoluteDateFilter {
+    absoluteDateFilter: {
+        dataSet: string;
+        from: string;
+        to: string;
+    };
+}
+
+export interface IRelativeDateFilter {
+    relativeDateFilter: {
+        dataSet: string; // URISTRING
+        granularity: string;
+        from: number;
+        to: number;
+    };
+}
+
+export interface ITotalItem {
+    measureIdentifier: Identifier;
+    type: TotalType;
+    attributeIdentifier: string;
 }
 
 export type CategoryType = 'attribute' | 'date';
@@ -79,10 +153,6 @@ export interface ICategory {
     };
 }
 
-export type CategoryCollection = 'attribute' | 'stack' | 'view' | 'trend' | 'segment';
-
-export type VisualizationType = 'table' | 'line' | 'column' | 'bar' | 'pie' | 'doughnut' | 'combo';
-
 export interface IVisualizationObject {
     meta: IVisualizationObjectMeta;
     content: IVisualizationObjectContent;
@@ -94,12 +164,6 @@ export interface IVisualization {
 
 export interface IVisualizationObjectResponse {
     visualization: IVisualizationObject;
-}
-
-export interface IBuckets {
-    measures: IMeasure[];
-    categories: ICategory[];
-    filters: EmbeddedFilter[];
 }
 
 export interface IVisualizationObjectMeta {
@@ -122,8 +186,40 @@ export interface IVisualizationObjectMeta {
 }
 
 export interface IVisualizationObjectContent {
-    type: VisualizationType;
-    buckets: IBuckets;
+    visualizationClass: string;
+    buckets: IBucket[];
+    visType: VisualizationType; // TODO: delete
+    filters?: EmbeddedFilter[];
+    properties?: string;
+    references?: IReferenceItem[];
+}
+
+export interface IReferenceItem {
+    [identifier: string]: string;
+}
+
+export interface IBucket {
+    localIdentifier?: Identifier;
+    items: BucketItem[];
+    totals?: ITotalItem[];
+}
+
+export interface IMeasure {
+    measure: {
+        localIdentifier: Identifier;
+        definition: IMeasureDefinition | IPoPMeasureDefinition
+        alias?: string;
+        title?: string,
+        format?: string;
+    };
+}
+
+export interface IVisualizationAttribute {
+    visualizationAttribute: {
+        localIdentifier: Identifier;
+        displayForm: string,
+        alias?: string
+    };
 }
 
 export interface IAttributesMap {
@@ -141,4 +237,35 @@ export interface IVisualizationMetadataResult {
 
 export function isEmbeddedDateFilter(dateFilter: EmbeddedFilter): dateFilter is IEmbeddedDateFilter {
     return (dateFilter as IEmbeddedDateFilter).dateFilter !== undefined;
+}
+
+export function isMeasure(bucketItem: IMeasure | IVisualizationAttribute): bucketItem is IMeasure {
+    return (bucketItem as IMeasure).measure !== undefined;
+}
+
+export function isVisualizationAttribute(bucketItem: IMeasure | IVisualizationAttribute)
+: bucketItem is IVisualizationAttribute {
+        return (bucketItem as IVisualizationAttribute).visualizationAttribute !== undefined;
+}
+
+export function isMeasureDefinition(definition: IMeasureDefinition | IPoPMeasureDefinition)
+: definition is IMeasureDefinition {
+    return (definition as IMeasureDefinition).measureDefinition !== undefined;
+}
+
+export function isAttributeFilter(filter: MeasureFilter): filter is AttributeFilter {
+    return (filter as IPositiveAttributeFilter).positiveAttributeFilter !== undefined ||
+        (filter as INegativeAttributeFilter).negativeAttributeFilter !== undefined;
+}
+
+export function isPositiveAttributeFilter(filter: AttributeFilter): filter is IPositiveAttributeFilter {
+    return (filter as IPositiveAttributeFilter).positiveAttributeFilter !== undefined;
+}
+
+export function isAbsoluteDateFilter(filter: DateFilter): filter is IAbsoluteDateFilter {
+    return (filter as IAbsoluteDateFilter).absoluteDateFilter !== undefined;
+}
+
+export function isAttribute(bucketItem: BucketItem): bucketItem is IVisualizationAttribute {
+    return (bucketItem as IVisualizationAttribute).visualizationAttribute !== undefined;
 }

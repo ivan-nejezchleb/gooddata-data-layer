@@ -4,7 +4,6 @@ import * as DataSource from './dataSources/DataSource';
 import * as Filters from './helpers/filters';
 import * as Uri from './helpers/uri';
 import { createSubject, ISubject } from './utils/async';
-import { toAfmResultSpec } from './converters/toAfmResultSpec';
 import * as ResultSpecUtils from './utils/ResultSpecUtils';
 import * as AfmUtils from './utils/AfmUtils';
 import * as VisualizationObject from './converters/model/VisualizationObject';
@@ -21,7 +20,6 @@ export {
     AfmUtils,
     ExecuteAfmAdapter,
     DataSourceUtils,
-    toAfmResultSpec,
     createSubject,
     ISubject,
     DataSource,
