@@ -305,22 +305,21 @@ function convertResultSpec(
 
     const afmAttributes = afm.attributes;
     const dimensions = [
-        categories.filter(c => c.category.collection === xySpec.x).map(categoryToIdentFunc(afmAttributes)),
-        categories.filter(c => c.category.collection === xySpec.y).map(categoryToIdentFunc(afmAttributes))
+        categories.filter(c => c.category.collection === xySpec.y).map(categoryToIdentFunc(afmAttributes)),
+        categories.filter(c => c.category.collection === xySpec.x).map(categoryToIdentFunc(afmAttributes))
     ];
 
     if (measures.length > 0) {
-        // for PIE chart with multiple metrics we need data like [[M1, M2, M3]] -> measureGroup in X
         const pieOnlyMeasures = visObj.type === 'pie' && categories.length === 0;
-        const stackedChart = categories.some(c => c.category.collection === 'stack'); // TODO tests
-        const measureGroupIndex = pieOnlyMeasures || stackedChart ? 0 : 1;
-        dimensions[measureGroupIndex].push('measureGroup'); // TODO tests
+        const stackedChart = categories.some(c => c.category.collection === 'stack');
+        const measureGroupIndex = pieOnlyMeasures || stackedChart ? 1 : 0;
+        dimensions[measureGroupIndex].push('measureGroup');
     }
 
     return {
-        dimensions: [ // means that data is returned in array[dim1][dim0]
-            { itemIdentifiers: dimensions[0] }, // dimension 0
-            { itemIdentifiers: dimensions[1] }, // dimension 1
+        dimensions: [
+            { itemIdentifiers: dimensions[0] },
+            { itemIdentifiers: dimensions[1] },
         ],
         ...sortsProp
     };

@@ -40,10 +40,10 @@ export const simpleMeasure: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ]
     }
@@ -82,10 +82,10 @@ export const filteredMeasure: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ]
     }
@@ -134,10 +134,10 @@ export const measureWithRelativeDate: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ]
     }
@@ -185,10 +185,10 @@ export const measureWithAbsoluteDate: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ]
     }
@@ -234,10 +234,10 @@ export const popMeasure: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['a1']
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: ['a1']
             }
         ],
         sorts: [
@@ -297,10 +297,10 @@ export const popMeasureWithSorting: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['a1']
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: ['a1']
             }
         ],
         sorts: [
@@ -350,10 +350,10 @@ export const showInPercent: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['a1']
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: ['a1']
             }
         ]
     }
@@ -388,10 +388,10 @@ export const showInPercentWithDate: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['a1']
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: ['a1']
             }
         ]
     }
@@ -417,10 +417,10 @@ export const measureWithSorting: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ],
         sorts: [
@@ -455,11 +455,11 @@ export const categoryWithSorting: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['a1']
+                itemIdentifiers: []
             },
             {
-                itemIdentifiers: []
-            }
+                itemIdentifiers: ['a1']
+            },
         ],
         sorts: [
             {
@@ -493,10 +493,10 @@ export const factBasedMeasure: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ]
     }
@@ -522,10 +522,10 @@ export const attributeBasedMeasure: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ]
     }
@@ -588,10 +588,10 @@ export const stackingAttribute: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['a1', 'measureGroup']
+                itemIdentifiers: ['a2']
             },
             {
-                itemIdentifiers: ['a2']
+                itemIdentifiers: ['a1', 'measureGroup']
             }
         ]
     }
@@ -695,10 +695,10 @@ export const attributeWithIdentifier: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             },
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             }
         ]
     }
@@ -738,10 +738,10 @@ export const segmentedAndTrendedLineChart: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['a1']
+                itemIdentifiers: ['a2', 'measureGroup']
             },
             {
-                itemIdentifiers: ['a2', 'measureGroup']
+                itemIdentifiers: ['a1']
             }
         ]
     }
@@ -777,10 +777,10 @@ export const measuresOnlyPieChart: IFixture = {
     resultSpec: {
         dimensions: [
             {
-                itemIdentifiers: ['measureGroup']
+                itemIdentifiers: []
             },
             {
-                itemIdentifiers: []
+                itemIdentifiers: ['measureGroup']
             }
         ]
     }
