@@ -20,6 +20,7 @@ export class UriAdapter implements IAdapter<any> { // todo any
     constructor(
         private sdk: typeof GoodData,
         private projectId: string,
+        private translatedPopSuffix: string,
         private executeAdapterFactory: any = defaultExecuteAdapterFactory
     ) {}
 
@@ -27,7 +28,7 @@ export class UriAdapter implements IAdapter<any> { // todo any
         return this.fetchVisualizationObject(sourceParams.uri)
             .then((visObject) => {
                 const content = visObject.visualization.content;
-                const { afm, resultSpec } = toAfmResultSpec(content);
+                const { afm, resultSpec } = toAfmResultSpec(content, this.translatedPopSuffix);
                 const afmWithAttributeFilters: AFM.IAfm = appendFilters(
                     afm,
                     sourceParams.attributeFilters || [],

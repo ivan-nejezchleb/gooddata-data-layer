@@ -122,11 +122,17 @@ function convertMeasureFilters(measure: VisObj.IMeasure): AFM.AttributeFilterIte
     return measure.measure.measureFilters.map(convertFilter) as AFM.AttributeFilterItem[];
 }
 
-function convertMeasureAfm(measure: VisObj.IMeasure, index: number, popAttribute?: string): AFM.IMeasure[] {
+function convertMeasureAfm(
+    measure: VisObj.IMeasure,
+    index: number,
+    popAttribute: string,
+    translatedPopSuffix: string
+): AFM.IMeasure[] {
     const computeRatioProp = measure.measure.showInPercent ? { computeRatio: true } : {};
     const aggregationProp = measure.measure.aggregation ? { aggregation: measure.measure.aggregation } : {};
     const filters = compact(convertMeasureFilters(measure));
     const filtersProp = filters.length ? { filters } : {};
+    const aliasProp = measure.measure.title ? { alias: measure.measure.title } : {};
     const measures: AFM.IMeasure[] = [
         {
             localIdentifier: getMeasureId(index, false, measure),
@@ -139,11 +145,15 @@ function convertMeasureAfm(measure: VisObj.IMeasure, index: number, popAttribute
                     ...computeRatioProp,
                     ...filtersProp
                 }
-            }
+            },
+            ...aliasProp
         }
     ];
 
     if (measure.measure.showPoP) {
+        const aliasPopProp = measure.measure.title
+            ? { alias: `${measure.measure.title} - ${translatedPopSuffix}` }
+            : {};
         const popMeasure: AFM.IMeasure = {
             localIdentifier: getMeasureId(index, true),
             definition: {
@@ -153,7 +163,8 @@ function convertMeasureAfm(measure: VisObj.IMeasure, index: number, popAttribute
                         uri: popAttribute
                     }
                 }
-            }
+            },
+            ...aliasPopProp
         };
 
         measures.unshift(popMeasure);
@@ -218,13 +229,13 @@ function getPoPAttribute(visObj: VisObj.IVisualizationObjectContent): string {
     return null;
 }
 
-function convertAFM(visObj: VisObj.IVisualizationObjectContent): AFM.IAfm {
+function convertAFM(visObj: VisObj.IVisualizationObjectContent, translatedPopSuffix: string): AFM.IAfm {
     const attributes = visObj.buckets.categories.map(convertAttribute);
     const attributesProp = attributes.length ? { attributes } : {};
 
     const popAttribute = getPoPAttribute(visObj);
     const measures = flatten(visObj.buckets.measures.map((measure, index) => {
-        return convertMeasureAfm(measure, index, popAttribute);
+        return convertMeasureAfm(measure, index, popAttribute, translatedPopSuffix);
     }));
     const measuresProp = measures.length ? { measures } : {};
 
@@ -321,8 +332,11 @@ export interface IConvertedAFM {
     type: VisObj.VisualizationType;
 }
 
-export function toAfmResultSpec(visObj: VisObj.IVisualizationObjectContent): IConvertedAFM {
-    const afm = convertAFM(visObj);
+export function toAfmResultSpec(
+    visObj: VisObj.IVisualizationObjectContent,
+    translatedPopSuffix: string
+): IConvertedAFM {
+    const afm = convertAFM(visObj, translatedPopSuffix);
 
     return {
         type: visObj.type,

@@ -32,7 +32,8 @@ export const simpleMeasure: IFixture = {
                             uri: METRIC_ID_URI
                         }
                     }
-                }
+                },
+                alias: 'Measure M1'
             }
         ]
     },
@@ -72,7 +73,8 @@ export const filteredMeasure: IFixture = {
                             }
                         ]
                     }
-                }
+                },
+                alias: 'Measure M1'
             }
         ]
     },
@@ -123,7 +125,8 @@ export const measureWithRelativeDate: IFixture = {
                             }
                         ]
                     },
-                }
+                },
+                alias: 'Measure M1'
             }
         ]
     },
@@ -173,7 +176,8 @@ export const measureWithAbsoluteDate: IFixture = {
                             }
                         ]
                     }
-                }
+                },
+                alias: 'Measure M1'
             }
         ]
     },
@@ -202,7 +206,8 @@ export const popMeasure: IFixture = {
                             uri: ATTRIBUTE_URI
                         }
                     }
-                }
+                },
+                alias: 'Measure M1 - translated-pop-suffix'
             },
             {
                 localIdentifier: 'm1',
@@ -212,7 +217,8 @@ export const popMeasure: IFixture = {
                             uri: METRIC_ID_URI
                         }
                     }
-                }
+                },
+                alias: 'Measure M1'
             }
         ],
         attributes: [
@@ -263,7 +269,8 @@ export const popMeasureWithSorting: IFixture = {
                             uri: ATTRIBUTE_URI
                         }
                     }
-                }
+                },
+                alias: 'Measure M1 - translated-pop-suffix'
             },
             {
                 localIdentifier: 'm1',
@@ -273,7 +280,8 @@ export const popMeasureWithSorting: IFixture = {
                             uri: METRIC_ID_URI
                         }
                     }
-                }
+                },
+                alias: 'Measure M1'
             }
         ],
         attributes: [
@@ -324,7 +332,8 @@ export const showInPercent: IFixture = {
                         },
                         computeRatio: true
                     },
-                }
+                },
+                alias: 'Measure M1'
             }
         ],
 
@@ -362,7 +371,8 @@ export const showInPercentWithDate: IFixture = {
                         },
                         computeRatio: true
                     }
-                }
+                },
+                alias: 'Measure M1'
             }
         ],
 
@@ -398,7 +408,8 @@ export const measureWithSorting: IFixture = {
                             uri: METRIC_ID_URI
                         }
                     }
-                }
+                },
+                alias: 'Measure M1'
             }
         ]
     },
@@ -473,7 +484,8 @@ export const factBasedMeasure: IFixture = {
                         },
                         aggregation: 'sum'
                     }
-                }
+                },
+                alias: 'SUM of Measure M1'
             }
         ]
     },
@@ -502,7 +514,8 @@ export const attributeBasedMeasure: IFixture = {
                         },
                         aggregation: 'count'
                     },
-                }
+                },
+                alias: 'COUNT of Measure M1'
             }
         ]
     },
@@ -530,7 +543,8 @@ export const stackingAttribute: IFixture = {
                         },
                         aggregation: 'sum'
                     }
-                }
+                },
+                alias: 'Sum of Bundle cost'
             }
         ],
         attributes: [
@@ -702,7 +716,8 @@ export const segmentedAndTrendedLineChart: IFixture = {
                         },
                         aggregation: 'sum'
                     }
-                }
+                },
+                alias: 'Sum of Bundle cost'
             }
         ],
         attributes: [
@@ -743,7 +758,8 @@ export const measuresOnlyPieChart: IFixture = {
                             uri: METRIC_ID_URI
                         }
                     }
-                }
+                },
+                alias: 'Close BOP'
             },
             {
                 localIdentifier: 'm2',
@@ -753,7 +769,8 @@ export const measuresOnlyPieChart: IFixture = {
                             uri: METRIC_ID_URI
                         }
                     }
-                }
+                },
+                alias: 'Close EOP'
             }
         ]
     },

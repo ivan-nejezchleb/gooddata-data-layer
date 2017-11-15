@@ -1,8 +1,6 @@
 import * as GoodData from 'gooddata';
 import { charts } from '../../converters/tests/fixtures/VisObj.fixtures';
-import {
-    UriAdapter
-} from '../UriAdapter';
+import { UriAdapter } from '../UriAdapter';
 
 describe('UriAdapter', () => {
     const projectId = 'FoodMartDemo';
@@ -27,16 +25,16 @@ describe('UriAdapter', () => {
     });
 
     it('should fetch visualization object when creating data source', () => {
-        const DummySDK = createDummySDK();
-        const adapter = new UriAdapter(DummySDK, projectId);
+        const dummySDK = createDummySDK();
+        const adapter = new UriAdapter(dummySDK, projectId, 'translated-pop-suffix');
         return adapter.createDataSource({ uri }).then(() => {
-            expect(DummySDK.xhr.get).toBeCalledWith(uri);
+            expect(dummySDK.xhr.get).toBeCalledWith(uri);
         });
     });
 
     it('should handle fail of vis. obj. fetch', () => {
         const DummySDK = createDummySDK();
-        const adapter = new UriAdapter(DummySDK, projectId);
+        const adapter = new UriAdapter(DummySDK, projectId, 'translated-pop-suffix');
         DummySDK.xhr.get = jest.fn(() => Promise.reject('invalid URI'));
         return adapter.createDataSource({ uri }).catch((error) => {
             expect(error).toBe('invalid URI');
@@ -45,7 +43,7 @@ describe('UriAdapter', () => {
 
     it('should request visualization object for consecutive createDataSource call only when uri changes', () => {
         const DummySDK = createDummySDK();
-        const adapter = new UriAdapter(DummySDK, projectId);
+        const adapter = new UriAdapter(DummySDK, projectId, 'translated-pop-suffix');
         return adapter.createDataSource({ uri }).then(() => {
             expect(DummySDK.xhr.get).toHaveBeenCalledTimes(1);
             return adapter.createDataSource({ uri }).then(() => {
