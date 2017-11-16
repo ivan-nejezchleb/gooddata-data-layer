@@ -3,7 +3,7 @@ import * as DataSourceUtils from './dataSources/utils';
 import * as DataSource from './dataSources/DataSource';
 import * as Filters from './helpers/filters';
 import * as Uri from './helpers/uri';
-import { createSubject } from './utils/async';
+import { createSubject, ISubject } from './utils/async';
 import { toAfmResultSpec } from './converters/toAfmResultSpec';
 import * as ResultSpecUtils from './utils/ResultSpecUtils';
 import * as AfmUtils from './utils/AfmUtils';
@@ -23,6 +23,7 @@ export {
     DataSourceUtils,
     toAfmResultSpec,
     createSubject,
+    ISubject,
     DataSource,
     DataTable,
     DummyAdapter,
