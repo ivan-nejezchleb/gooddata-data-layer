@@ -2,6 +2,8 @@ import flatMap = require('lodash/flatMap');
 import compact = require('lodash/compact');
 import { AFM } from '@gooddata/typings';
 
+export const ALL_TIME_GRANULARITY = 'ALL_TIME_GRANULARITY';
+
 export function unwrapSimpleMeasure(item: AFM.IMeasure): AFM.ISimpleMeasure {
     return (item.definition as AFM.ISimpleMeasureDefinition).measure;
 }
@@ -105,7 +107,7 @@ function dateFiltersDataSetsMatch(f1: AFM.DateFilterItem, f2: AFM.DateFilterItem
 
 function isDateFilterAllTime(dateFilter: AFM.DateFilterItem): boolean {
     if (isDateFilterRelative(dateFilter)) {
-        return dateFilter.relativeDateFilter.from === 0 && dateFilter.relativeDateFilter.to === 0;
+        return dateFilter.relativeDateFilter.granularity === ALL_TIME_GRANULARITY;
     }
     return false;
 }

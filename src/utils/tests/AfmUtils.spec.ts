@@ -5,7 +5,8 @@ import {
     isAfmExecutable,
     normalizeAfm,
     isDateFilter,
-    isAttributeFilter
+    isAttributeFilter,
+    ALL_TIME_GRANULARITY
 } from '../AfmUtils';
 import {
     Granularities
@@ -251,7 +252,7 @@ describe('AFM utils', () => {
             },
             from: 0,
             to: 0,
-            granularity: Granularities.DATE
+            granularity: ALL_TIME_GRANULARITY
         }
     };
 
