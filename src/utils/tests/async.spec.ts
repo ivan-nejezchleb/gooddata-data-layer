@@ -10,10 +10,9 @@ function delay(timeout = 0) {
 
 describe('createSubject', () => {
     it('should keep stream opened after error', (done) => {
-        const success = jest.fn();
         const error = jest.fn();
         let successCalls = 0;
-        const subject = createSubject((res) => {
+        const subject = createSubject(() => {
             successCalls++;
             if (successCalls === 2) {
                 expect(error).toHaveBeenCalledTimes(1);

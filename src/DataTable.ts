@@ -1,14 +1,10 @@
 import isEqual = require('lodash/isEqual');
-import identity = require('lodash/identity');
-
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
 import { AFM } from '@gooddata/typings';
 
 import { IAdapter } from './interfaces/Adapter';
 import { IDataSource } from './interfaces/DataSource';
 import { isAfmExecutable } from './utils/AfmUtils';
+import { createSubject, ISubject } from './utils/async';
 
 export type IDataSubscriber = (data: any) => void;
 export type IErrorSubscriber = (error: any) => void;
@@ -23,19 +19,15 @@ export class DataTable<T> {
 
     private dataSource: IDataSource<T>;
 
-    private subject: Subject<Promise<T>>;
-    private subscription: Subscription;
+    private subject: ISubject<Promise<T>>;
 
     constructor(adapter: IAdapter<T>) {
         this.adapter = adapter;
 
-        this.subject = new Subject<Promise<T>>();
-        this.subscription = this.subject
-            .switchMap<Promise<T>, T>(identity)
-            .subscribe(
-                result => this.dataSubscribers.forEach(handler => handler(result)),
-                error => this.errorSubscribers.forEach(handler => handler(error))
-            );
+        this.subject = createSubject(
+            result => this.dataSubscribers.forEach(handler => handler(result)),
+            error => this.errorSubscribers.forEach(handler => handler(error))
+        );
     }
 
     public getData(afm: AFM.IAfm, resultSpec: AFM.IResultSpec) {
